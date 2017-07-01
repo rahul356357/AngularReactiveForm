@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/user.js')
-const crypto = require('crypto');
+const crypto = require('crypto-js');
 /* GET users listing. */
 //route for saving a user to database
 router.post('/', function(req, res, next) {
@@ -13,22 +13,18 @@ let newUser= new User({
     gender:req.body.gender,
     email:req.body.email,
     dob:req.body.dob,
+    crypt:crypto.AES.encrypt(req.body.password, 'rahul')
 }) ;
-newUser.setPassword(req.body.password);
+
 newUser.save().then(
-    (done)=>
+    (user)=>
     {
-    console.log(done)
+    res.json({success:true, message:"User Successfully Saved", user:user})
     },
     (error)=>{
-        console.log(error)
+    res.json({success:false, message:error.message, error:error})
     }
 )
-
-
-
-res.json("reached")
-
 
 
 });

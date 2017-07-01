@@ -12,9 +12,6 @@ export class AuthenticationService {
 // method to register a user 
    register(body):Observable<Response>
   {
-    console.log('====================================');
-    console.log(body);
-    console.log('====================================');
   return this.http.post(this.db.url+'users',body).map((res)=>{
     return res.json()
   })._catch((error)=>{

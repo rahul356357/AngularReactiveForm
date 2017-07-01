@@ -2,9 +2,11 @@
   <div class="row justify-content-center">
     <div class=" col col-lg-4 col-md-offset-2 col-md-8 register-form ">
       <h4 class="text-center">Registration</h4>
+      <!--define a form group and ngSubmit to submit the form -->
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="Name">Name</label>
+          <!--define a formcontrol to bind it to the current controls-->
           <input type="text" id="name" formControlName="name" class="form-control">
         </div>
         <div class="form-group">
@@ -23,20 +25,21 @@
         </div>
         <div class="form-group">
           <label for="DOB">Password</label>
-          <input type="password" id="Dob" formControlName="password" class="form-control">
+          <input type="password" id="password" formControlName="password" class="form-control">
         </div>
         <div class="form-group">
           <label for="DOB"> Confirm Password</label>
-          <input type="password" id="Dob" formControlName="cpassword" class="form-control">
+          <input type="password" id="Cpassword" formControlName="cpassword" class="form-control">
         </div>
         <div  class="error text-center" *ngIf="registerForm.get('cpassword').touched&&registerForm.hasError('nomatch')" >
           Password And Confirm Password Do Not Match
         </div>
-        <button type="submit" [disabled]="!registerForm.valid" class="btn btn-outline-success">
+        <span class="button-group"> 
+          <button type="submit" [disabled]="!registerForm.valid" class="btn btn-outline-success">
            Submit
            </button>
+           <button class="btn btn-outline-danger" type="reset" (click)="registerForm.reset()" >Cancel</button>   </span>
       </form>
-
     </div>
   </div>
 </div>
